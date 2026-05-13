@@ -1,24 +1,26 @@
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from app.domain.models import Usuario
 from dotenv import load_dotenv
+import bcrypt
 import os
 
 load_dotenv()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "chave-secreta-padrao-2026")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 def hash_senha(senha: str) -> str:
-    return pwd_context.hash(senha)
+    senha_bytes = senha.encode("utf-8")
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(senha_bytes, salt).decode("utf-8")
 
 def verificar_senha(senha: str, hash: str) -> bool:
-    return pwd_context.verify(senha, hash)
+    senha_bytes = senha.encode("utf-8")
+    hash_bytes = hash.encode("utf-8")
+    return bcrypt.checkpw(senha_bytes, hash_bytes)
 
 def criar_token(dados: dict) -> str:
     dados_copia = dados.copy()

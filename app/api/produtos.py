@@ -109,6 +109,5 @@ def criar_produto(
         "descricao": novo.descricao,
         "preco": novo.preco,
         "categoria": novo.categoria,
-        "disponivel": novo.disponivel_globalmente,
-        "created_at": novo.created_at
+        "disponivel": novo.disponivel_globalmente
     }

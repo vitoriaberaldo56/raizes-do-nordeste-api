@@ -45,7 +45,6 @@ cd raizes-do-nordeste-api
 ```
 
 ### 2. Crie e ative o ambiente virtual
-
 ```bash
 # Windows
 python -m venv venv
@@ -54,6 +53,7 @@ venv\Scripts\activate
 # Mac/Linux
 python -m venv venv
 source venv/bin/activate
+```
 
 ### 3. Instale as dependências
 ```bash
@@ -62,16 +62,15 @@ pip install -r requirements.txt
 
 ### 4. Configure as variáveis de ambiente
 ```bash
-# Copie o arquivo de exemplo
+# Windows
+copy .env.example .env
+
+# Mac/Linux
 cp .env.example .env
 ```
 
-Edite o `.env` com suas configurações:
-```
-DATABASE_URL=sqlite:///./raizes.db
-SECRET_KEY=sua-chave-secreta-aqui
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=60
+O arquivo `.env.example` já contém uma chave de teste funcional.
+Basta copiar o arquivo, não é necessário editar nada para rodar localmente.
 ```
 
 ### 5. Inicie a API

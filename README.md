@@ -160,7 +160,33 @@ raizes-do-nordeste-api/
 ### Usando o Postman
 1. Importe o arquivo `colecao_postman.json` disponível no repositório
 2. Configure a variável de ambiente `base_url` como `http://localhost:8000`
-3. Execute na ordem sugerida: Auth → Unidades → Produtos → Estoque → Pedidos → Pagamentos
+3. Execute na ordem abaixo: 
+
+**Pré-requisito — Popular o banco (usar token do GERENTE):**
+- Cadastrar usuário GERENTE: `POST /auth/cadastro` com `"perfil": "GERENTE"`
+- Login com GERENTE: `POST /auth/login`
+- Criar unidade: `POST /unidades`
+- Criar produto: `POST /produtos`
+- Registrar estoque: `POST /estoque/entrada`
+
+**Ordem dos testes:**
+
+| Ordem | ID | Descrição |
+|---|---|---|
+| 1 | T03 | Cadastro de usuário CLIENTE |
+| 2 | T01 | Login válido (salva token automaticamente) |
+| 3 | T02 | Login com senha errada |
+| 4 | T04 | Cadastro com e-mail duplicado |
+| 5 | T05 | Acesso sem token |
+| 6 | T06 | Criar pedido válido |
+| 7 | T07 | Criar pedido sem canalPedido |
+| 8 | T08 | Criar pedido com estoque insuficiente |
+| 9 | T09 | Processar pagamento mock |
+| 10 | T10 | Pagamento já processado |
+| 11 | T11 | Atualizar status sem permissão |
+| 12 | T12 | Consultar fidelidade sem consentimento |
+
+> ⚠️ O T03 deve ser executado antes do T01. Após o T01, o token é salvo automaticamente na variável `{{token}}`.
 
 ---
 

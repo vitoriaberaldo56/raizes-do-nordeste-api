@@ -159,15 +159,18 @@ raizes-do-nordeste-api/
 
 ### Usando o Postman
 1. Importe o arquivo `colecao_postman.json` disponível no repositório
-2. Configure a variável de ambiente `base_url` como `http://localhost:8000`
+2. Importe o arquivo `ambiente_postman.json`
+3. No canto superior direito selecione o ambiente **Raízes Local**
 3. Execute na ordem abaixo: 
 
 **Pré-requisito — Popular o banco (usar token do GERENTE):**
 - Cadastrar usuário GERENTE: `POST /auth/cadastro` com `"perfil": "GERENTE"`
-- Login com GERENTE: `POST /auth/login`
+- Login com GERENTE: `POST /auth/login` (salva token_gerente)
 - Criar unidade: `POST /unidades`
 - Criar produto: `POST /produtos`
 - Registrar estoque: `POST /estoque/entrada`
+- Cadastrar SEM consentimento `POST /auth/cadastro`
+- Login SEM consentimento: `POST /auth/login` (salva token_sem_consentimento)
 
 **Ordem dos testes:**
 

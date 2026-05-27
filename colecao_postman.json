@@ -72,7 +72,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"nome\": \"Maria Silva\",\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"perfil\": \"CLIENTE\",\r\n  \"consentimento_lgpd\": true\r\n}\r\n//Esperado: 201",
+              "raw": "{\r\n  \"nome\": \"Maria Silva\",\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"perfil\": \"CLIENTE\",\r\n  \"consentimento_lgpd\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -99,7 +99,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"senhaerrada\"\r\n}\r\n//Esperado: 401\r\n",
+              "raw": "{\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"senhaerrada\"\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -126,7 +126,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"nome\": \"Maria Silva\",\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"perfil\": \"CLIENTE\",\r\n  \"consentimento_lgpd\": true\r\n}\r\n//Esperado: 409",
+              "raw": "{\r\n  \"nome\": \"Maria Silva\",\r\n  \"email\": \"maria@exemplo.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"perfil\": \"CLIENTE\",\r\n  \"consentimento_lgpd\": true\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -267,6 +267,50 @@
               "path": [
                 "auth",
                 "cadastro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login SEM consentimento",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    pm.environment.set(\"token_sem_consentimento\", json.accessToken);\r",
+                  "    console.log(\"Token sem consentimento salvo!\");\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"semconsentimento@exemplo.com\",\r\n  \"senha\": \"Senha@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
               ]
             }
           },
@@ -818,7 +862,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{token}}",
+                  "value": "{{token_sem_consentimento}}",
                   "type": "string"
                 }
               ]

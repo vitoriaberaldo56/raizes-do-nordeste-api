@@ -188,6 +188,12 @@ raizes-do-nordeste-api/
 
 > ⚠️ O T03 deve ser executado antes do T01. Após o T01, o token é salvo automaticamente na variável `{{token}}`.
 
+> ⚠️ Para o teste T12, é necessário cadastrar previamente um usuário 
+> com `consentimento_lgpd: false` usando a requisição 
+> **"Cadastrar usuário SEM consentimento"** na pasta Auth, 
+> fazer login e salvar o token como `{{token_sem_consentimento}}`.
+
+
 ---
 
 ## Segurança e LGPD

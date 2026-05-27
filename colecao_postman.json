@@ -227,6 +227,50 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Cadastrar SEM consentimento",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {\r",
+                  "    const json = pm.response.json();\r",
+                  "    pm.environment.set(\"token_sem_consentimento\", json.accessToken);\r",
+                  "    console.log(\"Token sem consentimento salvo!\");\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\": \"Usuario Sem Consentimento\",\r\n  \"email\": \"semconsentimento@exemplo.com\",\r\n  \"senha\": \"Senha@123\",\r\n  \"perfil\": \"CLIENTE\",\r\n  \"consentimento_lgpd\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/cadastro",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "cadastro"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -239,6 +283,16 @@
             "disableBodyPruning": true
           },
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "body": {
@@ -361,6 +415,33 @@
                 }
               }
             },
+            "url": {
+              "raw": "{{base_url}}/produtos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "produtos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar produtos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
             "url": {
               "raw": "{{base_url}}/produtos",
               "host": [
@@ -622,7 +703,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"status\": \"PRONTO\"\r\n}\r\n//Esperado: 403 (pois o usuário CLIENTE não tem permissão)",
+              "raw": "{\r\n  \"status\": \"PRONTO\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -665,7 +746,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"forma_pagamento\": \"MOCK\"\r\n}\r\n//Esperado: 200 (APROVADO ou RECUSADO)",
+              "raw": "{\r\n  \"forma_pagamento\": \"MOCK\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -703,7 +784,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"forma_pagamento\": \"MOCK\"\r\n}\r\n//Esperado: 409",
+              "raw": "{\r\n  \"forma_pagamento\": \"MOCK\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

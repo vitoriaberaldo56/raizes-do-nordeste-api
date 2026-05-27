@@ -1,0 +1,40 @@
+{
+	"id": "61be1a2b-d866-484f-861c-5075849004bb",
+	"name": "Raízes Local",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token_gerente",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "pedido_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "token_sem_consentimento",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"color": 120,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-05-27T22:42:47.569Z",
+	"_postman_exported_using": "Postman/12.12.3"
+}
